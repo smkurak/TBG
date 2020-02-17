@@ -1,17 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-2616830658137765430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5553242431378796596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54a8d43519350f343b69d56be8281087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &82689644916126506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19,6 +7,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5913742942168096380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a8d43519350f343b69d56be8281087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-2616830658137765430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5553242431378796596}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54a8d43519350f343b69d56be8281087, type: 3}
@@ -106,7 +106,22 @@ PrefabInstance:
     - target: {fileID: 5478920106033596827, guid: 8537460e791dc1042a8ce12ecec3015c,
         type: 3}
       propertyPath: weapon
-      value: 2
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5478920106033596827, guid: 8537460e791dc1042a8ce12ecec3015c,
+        type: 3}
+      propertyPath: runSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5478920106033596827, guid: 8537460e791dc1042a8ce12ecec3015c,
+        type: 3}
+      propertyPath: distanceFromEnemy
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5478920106033596827, guid: 8537460e791dc1042a8ce12ecec3015c,
+        type: 3}
+      propertyPath: target
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5907913086351786810, guid: 8537460e791dc1042a8ce12ecec3015c,
         type: 3}

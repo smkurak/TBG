@@ -14,7 +14,8 @@ public class CharacterAnimEvents : MonoBehaviour
     void AttackEnd()
     {
         character.SetState(Character.State.RunningFromEnemy);
-    }
+		
+	}
 
     void FistEnd()
     {

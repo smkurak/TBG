@@ -13,7 +13,7 @@ public class Character : MonoBehaviour
         Attack,
         BeginShoot,
         Shoot,
-        Died,
+		Dead,
     }
 
     public enum Weapon
@@ -25,15 +25,13 @@ public class Character : MonoBehaviour
 
     public float runSpeed;
     public float distanceFromEnemy;
-    public Transform target;
-  //  public Character targChar;
+    public Character target;
     public Weapon weapon;
     Animator animator;
     Vector3 originalPosition;
     Quaternion originalRotation;
     State state = State.Idle;
-    bool dead;
-
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +43,10 @@ public class Character : MonoBehaviour
     [ContextMenu("Attack")]
     void AttackEnemy()
     {
-        switch (weapon)
+		if (state != State.Idle || target.state == State.Dead)
+			return;
+
+		switch (weapon)
         {
             case Weapon.Bat:
                 state = State.RunningToEnemy;
@@ -61,10 +62,16 @@ public class Character : MonoBehaviour
         }
     }
 
-    public bool IsDead()
+	public bool IsIdle()
+	{
+		return state == State.Idle;
+	}
+
+	public bool IsDead()
     {
-        return state == State.Died;
+        return state == State.Dead;
     }
+
     public void SetState(State newState)
     {
         state = newState;
@@ -82,7 +89,7 @@ public class Character : MonoBehaviour
 
             case State.RunningToEnemy:
                 animator.SetFloat("speed", runSpeed);
-                if (RunTowards(target.position, distanceFromEnemy))
+                if (RunTowards(target.transform.position, distanceFromEnemy))
                     state = State.BeginAttack;
                 break;
 
@@ -106,6 +113,7 @@ public class Character : MonoBehaviour
                     break;
                 }
                 state = State.Attack;
+				Kill();
                 break;
 
             case State.Attack:
@@ -116,13 +124,14 @@ public class Character : MonoBehaviour
                 animator.SetFloat("speed", 0.0f);
                 animator.SetTrigger("shoot");
                 state = State.Shoot;
-                break;
+				Kill();
+				break;
 
             case State.Shoot:
                 animator.SetFloat("speed", 0.0f);
                 break;
 
-            case State.Died:
+            case State.Dead:
                 break;
 
         }
@@ -154,12 +163,12 @@ public class Character : MonoBehaviour
     public void Die()
     {
         animator.SetTrigger("died");
-        SetState(State.Died);
+        SetState(State.Dead);
     }
 
     public void Kill()
     {
-        //target.Die();
+        target.Die();
         //particleSystem.Play();
     }
 }

@@ -22,11 +22,30 @@ public class GameController : MonoBehaviour
         Debug.Log("Enemy won");
     }
 
-
+	Character FirstAliveCharacter(Character[] characters)
+	{
+		foreach (var character in characters)
+		{
+			if (!character.IsDead())
+				return character;
+		}
+		return null;
+	}
 
     bool CheckEndGame()
     {
-        return false;
+		if (FirstAliveCharacter(playerCharacters) == null)
+		{
+			EnemyWon();
+			return true;
+		}
+		if (FirstAliveCharacter(enemyCharacters) == null)
+		{
+			PlayerWon();
+			return true;
+		}
+
+		return false;
     }
 
     IEnumerator GameLoop()
