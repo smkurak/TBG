@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//события, происходящие по "events" в аниматоре, см. клипы анимации.
 public class CharacterAnimEvents : MonoBehaviour
 {
     Character character;
@@ -11,16 +12,20 @@ public class CharacterAnimEvents : MonoBehaviour
         character = GetComponentInParent<Character>();
     }
 
-    void AttackEnd()
-    {
-        character.SetState(Character.State.RunningFromEnemy);
-		
+	void Attack()
+	{
+		character.DoDamageToTarget();
 	}
 
-    void FistEnd()
+	void AttackEnd()
+	{
+		character.SetState(Character.State.RunningFromEnemy);
+	}
+
+	void Shoot()
     {
-        character.SetState(Character.State.RunningFromEnemy);
-    }
+        character.DoDamageToTarget();
+	}
 
     void ShootEnd()
     {

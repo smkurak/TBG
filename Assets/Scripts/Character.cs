@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//персонаж(как игрок, так и враг), управление его перемещениями, атакой, состояниями
 public class Character : MonoBehaviour
 {
     public enum State
@@ -27,6 +28,8 @@ public class Character : MonoBehaviour
     public float distanceFromEnemy;
     public Character target;
     public Weapon weapon;
+	public float damage;
+	public TargetIndicator targetIndicator;
     Animator animator;
     Vector3 originalPosition;
     Quaternion originalRotation;
@@ -40,8 +43,7 @@ public class Character : MonoBehaviour
         originalRotation = transform.rotation;
     }
 
-    [ContextMenu("Attack")]
-    void AttackEnemy()
+    public void AttackEnemy()
     {
 		if (state != State.Idle || target.state == State.Dead)
 			return;
@@ -99,7 +101,6 @@ public class Character : MonoBehaviour
                     state = State.Idle;
                 break;
 
-//проверка на кулак или биту
             case State.BeginAttack:
                 animator.SetFloat("speed", 0.0f);
                 switch (weapon)
@@ -113,8 +114,7 @@ public class Character : MonoBehaviour
                     break;
                 }
                 state = State.Attack;
-				Kill();
-                break;
+				break;
 
             case State.Attack:
                 animator.SetFloat("speed", 0.0f);
@@ -124,7 +124,6 @@ public class Character : MonoBehaviour
                 animator.SetFloat("speed", 0.0f);
                 animator.SetTrigger("shoot");
                 state = State.Shoot;
-				Kill();
 				break;
 
             case State.Shoot:
@@ -166,9 +165,15 @@ public class Character : MonoBehaviour
         SetState(State.Dead);
     }
 
-    public void Kill()
+    public void DoDamageToTarget()
     {
-        target.Die();
+		Health health = target.GetComponent<Health>();
+		if (health != null)
+		{
+			health.ApplyDamage(damage);
+			if (health.current <= 0.0f)
+			target.Die();
+		}
         //particleSystem.Play();
     }
 }
