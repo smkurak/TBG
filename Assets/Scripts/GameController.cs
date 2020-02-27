@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     public Character[] enemyCharacters;
 	Character currentTarget;
 	bool waitingPlayerInput;
+	public string message;
 
     void Start()
     {
@@ -16,14 +17,14 @@ public class GameController : MonoBehaviour
     }
 
 	[ContextMenu("Player Move")]
-	void PlayerMove()
+	public void PlayerMove()
 	{
 		if (waitingPlayerInput)
 			waitingPlayerInput = false;
 	}
 
 	[ContextMenu("Switch character")]
-	void SwitchCharacter()
+	public void SwitchCharacter()
 	{
 		for (int i = 0; i < enemyCharacters.Length; i++)
 		{
@@ -66,7 +67,8 @@ public class GameController : MonoBehaviour
 
 	void PlayerWon()
     {
-        Debug.Log("Player won");
+		message = "Player won";
+		Debug.Log("Player won");
     }
 
     void EnemyWon()
