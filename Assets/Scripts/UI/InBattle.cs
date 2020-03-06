@@ -32,7 +32,6 @@ public class InBattle : MonoBehaviour
 
 	private void reloadLevel()
 	{
-		battleScnName = "Battle_01";
 		SceneManager.LoadScene(battleScnName);
 	}
 

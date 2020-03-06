@@ -9,7 +9,9 @@ public class GameController : MonoBehaviour
     public Character[] enemyCharacters;
 	Character currentTarget;
 	bool waitingPlayerInput;
+	public WinLosePage winLosePage;
 	public string message;
+
 
     void Start()
     {
@@ -68,12 +70,15 @@ public class GameController : MonoBehaviour
 	void PlayerWon()
     {
 		message = "Player won";
+		winLosePage.typeMessage(message);
 		Debug.Log("Player won");
     }
 
     void EnemyWon()
     {
-        Debug.Log("Enemy won");
+		message = "Enemy won";
+		winLosePage.typeMessage(message);
+		Debug.Log("Enemy won");
     }
 
 	Character FirstAliveCharacter(Character[] characters)

@@ -30,6 +30,7 @@ public class Character : MonoBehaviour
     public Weapon weapon;
 	public float damage;
 	public TargetIndicator targetIndicator;
+
     Animator animator;
     Vector3 originalPosition;
     Quaternion originalRotation;
